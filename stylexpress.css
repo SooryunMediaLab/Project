@@ -17,6 +17,9 @@
     font-style: italic;
   }
 
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Gothic+Coding&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
 
 
 
@@ -24,8 +27,12 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'DM_Sans', sans-serif; 
-}
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: normal;}
+  
+    p {
+      font-family: 'DM_Sans', sans-serif;}
 
 a {
     position: relative;
@@ -68,7 +75,7 @@ a:hover::before {
 }
 
 .left-panel {
-    width: 40%;
+    width: 35%;
     position: fixed; /* Stay in place when scrolled */
     overflow-y: auto; /* Enable scrolling if content is taller than the screen */
     left: 0;
@@ -76,11 +83,14 @@ a:hover::before {
     bottom: 0;
     padding: 20px;
     background-color: ivory; /* Light grey background */
+    border-right: solid;
+
 }
 
 .right-panel {
-    width: 60%;
-    margin-left: 40%; /* Offset by the width of the left panel */
+  
+    width: 65%;
+    margin-left: 35%; /* Offset by the width of the left panel */
     overflow-y: auto; /* Enable scrolling */
     padding: 20px;
     height: 100vh;
@@ -88,15 +98,36 @@ a:hover::before {
     
 }
 
+ /* -----------+++++++++++panel slide++++++-------------- */
+
+ 
+
+ /* -----------+++++++++++panel slide end ++++++-------------- */
+
+strong {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
 h1 {
-    border-bottom: solid;
     font-size: 2.9rem;
-    padding-bottom: 1rem;
-    font-style: italic; 
+    padding-bottom: 0;
+    font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  z-index: 100; /* Ensure the left panel stays on top */
+
 }
 
 h2 {
     font-size: 2rem;
+    font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
 
 ul {
@@ -106,8 +137,7 @@ ul {
 }
 
 ol {
-    font-size: 1.8rem;
-    border-bottom: solid;
+    font-size: 1.7rem;
 }
 
 li {
@@ -124,6 +154,7 @@ h1, h2, p {
 section {
     margin-left: 0;
 }
+
 
 
 
@@ -281,3 +312,137 @@ section {
 .mySlides {
     display: none;
   }
+
+
+
+
+  hr {
+    background: rgba(0, 0, 0, 0.6);
+    border: 0;
+    height: 2px;
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    
+}
+
+
+
+ /* -----------+++++++++++Aboutme ++++++-------------- */
+
+
+ .HelloContainer {
+
+  position: relative;
+  padding: 10px;
+  display: flex; /* Use flexbox to center children */
+  flex-direction: column; 
+  justify-content: center; /* Center children horizontally */
+  align-items: center; /* Center children vertically */
+  height: 80vh; /* Optional: Adjust based on your needs */
+  background-color: none;
+}
+
+
+.Hellobox {
+  background-color: none;
+  font-family: 'Montserrat-Bold', sans-serif;
+  margin-top: 0.321em; /* Adjust margin as needed */
+  /* Ensure there's no extra margin or padding affecting alignment */
+  font-size: 4rem;
+  text-align: center;
+  
+}
+
+
+ .HelloSmall {
+  font-size: 1.5rem;
+  margin-top: 30px;
+  }
+
+.profilebox {
+  text-align: center;
+}
+
+#profile {
+
+  width: 300px;
+  border-radius: 50%;
+  border:solid 1px;
+
+}
+
+
+ /* -----------+++++++++++About me end ++++++-------------- */
+
+ /* -----------+++++++++++About me other starts ++++++-------------- */
+
+
+.cv-panel {
+  
+  width: 65%; /* Initial state, panel hidden */
+  position: fixed;
+  right: 0;
+  top: 0;
+    bottom: 0; /* Align bottom with the page */
+  height: 100vh; /* Adjust height based on the space left at the top */
+  background-color: ivory; /* Adjust based on your design */
+  overflow-y: auto; /* Enable scrolling */
+  z-index: 20; /* Ensure it does not overlap the left panel */
+  padding-top: 20px; /* Space inside the panel */
+  padding: 30px;}
+
+
+
+.cv-panel {
+  font-family: "Poppins", sans-serif; 
+    /* If there are additional styles needed specifically for cv-panel */
+}
+
+.cv-section {
+    margin-bottom: 2rem; /* Space between sections */
+}
+
+.cv-section h2 {
+    font-size: 1.8rem; /* Size of section headers */
+    font-weight: 500; /* Slightly bolder than normal text but less than bold */
+    margin-bottom: 1rem; /* Space below section headers */
+    color: #333; /* Dark gray for better readability */
+}
+
+.cv-section p, .cv-section li {
+    font-family: 'DM Sans', sans-serif; /* Consistency with paragraphs */
+    font-size: 1rem; /* Standard font size */
+    line-height: 1.6; /* Adequate line spacing for readability */
+    margin-bottom: 0.5rem; /* Space between paragraphs or list items */
+}
+
+.cv-section ul {
+    list-style-type: disc; /* Style of bullet points */
+    margin-left: 2rem; /* Indentation of list */
+}
+
+.experience-item {
+    margin-bottom: 1.5rem; /* Space between different experiences */
+}
+
+.experience-item h3 {
+    font-size: 1.4rem; /* Slightly larger than normal text for subheadings */
+    font-weight: 400; /* Regular weight for subheadings */
+    margin-bottom: 0.5rem; /* Space below subheadings */
+}
+
+/* Add any additional specific styles for elements within your CV sections here */
+
+/* Adjust the layout for small screens */
+@media (max-width: 768px) {
+  .cv-section {
+      margin-bottom: 15px;
+  }
+  .cv-section h2 {
+      font-size: 1.4rem;
+  }
+  .skills-list, .experience-item ul {
+      columns: 1; /* One column on smaller screens */
+  }
+}

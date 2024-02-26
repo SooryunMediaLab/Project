@@ -1,3 +1,5 @@
+
+ 
  /*---------------- slides---------------------- */
 
  var slideIndex = 1;
@@ -44,14 +46,6 @@ preventClicksOnImages();
 
 
 
- /*---------------- slides end---------------------- */
-
-
-
-
-
-
-
 
 
 
@@ -63,34 +57,43 @@ function showImages(projectId) {
   var selectedImages = document.getElementById(projectId);
   selectedImages.style.display = 'block'; // Show selected images
 }
+ /*---------------- slides end---------------------- */
 
 
 
- /* cursor start */
-var cursor = document.getElementById('cursor');
 
-document.addEventListener('mousemove', moveCursor)
+ /*---------------- panel slide start---------------------- */
 
-function moveCursor(e) {
-  var x = e.clientX;
-  var y = e.clientY;
-  cursor.style.left = `${x}px`;
-  cursor.style.top = `${y}px`;
-}
+ document.addEventListener("DOMContentLoaded", function() {
+  fetch('cv-panel.html')
+      .then(response => response.text())
+      .then(html => {
+          document.getElementById('cvPanelContainer').innerHTML = html;
+          // Now that the HTML is loaded, add the event listener to closeCvPanel
+          document.getElementById('closeCvPanel').addEventListener('click', function() {
+              document.querySelector('.cv-panel').classList.remove('active');
+          });
+      })
+      .catch(error => {
+          console.warn('Error loading the CV panel:', error);
+      });
+
+  // This assumes aboutMeLink exists in the initial HTML and not in cv-panel.html
+  document.getElementById('aboutMeLink').addEventListener('click', function() {
+      var cvPanel = document.querySelector('.cv-panel');
+      // Ensure the cvPanel was successfully loaded
+      if (cvPanel) {
+          cvPanel.classList.toggle('active');
+      } else {
+          console.warn('CV panel is not loaded yet.');
+      }
+  });
+});
 
 
-//To get all the paragraph elements
-var text = Array.from(document.querySelectorAll('p'));
 
-text.forEach(text => {
-  text.addEventListener('mousemove', function() {
-    cursor.classList.add('hover-cursor');
-  })
-//To remove the class when it doesn't hover the text
-  text.addEventListener('mouseleave', function () {
-    cursor.classList.remove('hover-cursor');
-  })
-})
-//The color of the circle is now cyan when you hover on text!
+ 
 
- /* cursor end */
+
+ /*---------------- panel slide end---------------------- */
+
