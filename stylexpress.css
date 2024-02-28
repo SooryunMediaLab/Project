@@ -220,6 +220,17 @@ section {
 
 
 
+#secondaryImage {
+  display: none; /* Hide the secondary image initially */
+  max-width: 50%; /* Adjust the width as needed */
+  height: auto;
+  max-height: auto;
+  /* Add other styles for the secondary image */
+}
+
+
+
+
 /* Adjust this as needed to fit your right panel's width */
 .slideshow-container {
     max-width: 80%; /* or another fixed width if necessary */
