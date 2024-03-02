@@ -1,4 +1,6 @@
-
+function toggleMenu() {
+    document.querySelector('.left-panel').classList.toggle('active');
+}
  
  /*---------------- slides---------------------- */
 
@@ -39,13 +41,6 @@ function preventClicksOnImages() {
   });
 }
 
-// Call the function to apply the event listeners
-preventClicksOnImages();
-
-
-
-
-
 
 
 
@@ -58,6 +53,38 @@ function showImages(projectId) {
   selectedImages.style.display = 'block'; // Show selected images
 }
  /*---------------- slides end---------------------- */
+
+
+
+
+/*---------------- Clickablel image starts---------------------- */
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Get references to the main and secondary images
+  const mainImage = document.getElementById("mainImage");
+  const secondaryImage = document.getElementById("secondaryImage");
+
+  // Add click event listener to the top-left part of the main image
+  mainImage.addEventListener("click", function (event) {
+      const clickX = event.clientX - this.getBoundingClientRect().left;
+      const clickY = event.clientY - this.getBoundingClientRect().top;
+
+      // Check if the click is in the top-left quadrant of the image
+      if (clickX < this.offsetWidth / 3 && clickY < this.offsetHeight / 3) {
+          // Show the secondary image
+          secondaryImage.style.display = "block";
+          // Change the source of the secondary image
+          secondaryImage.src = "image/StrangersDP.png";
+      }
+      // Add more conditions for other parts of the image as needed
+  });
+
+  // You can add more event listeners for other parts of the main image
+});
+
+
+/*---------------- Clickablel image ends---------------------- */
+
 
 
 
@@ -90,9 +117,6 @@ function showImages(projectId) {
   });
 });
 
-
-
- 
 
 
  /*---------------- panel slide end---------------------- */

@@ -1,4 +1,7 @@
-
+function toggleMenu() {
+    document.querySelector('.left-panel').classList.toggle('active');
+}
+ 
 
 /*---------------- Clickablel image starts---------------------- */
 document.addEventListener("DOMContentLoaded", function () {

@@ -98,6 +98,62 @@ a:hover::before {
     
 }
 
+
+
+/* Mobile styles */
+
+/* Hide hamburger menu on larger screens */
+.hamburger-menu {
+  display: none; /* Start by hiding the button */
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+  border: solid;
+  border-radius: 50%;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 3; /* Ensure it's above other content */
+}
+
+
+
+@media (max-width: 767px) {
+
+  .hamburger-menu {
+    display: block; /* Only display the button on small screens */
+}
+
+
+
+  .left-panel {
+      position: fixed;
+      width: 100%; /* Sidebar takes up less than full width */
+      height: 100%; /* Full screen height */
+      transform: translateX(-100%); /* Start off-screen */
+      z-index: 2; /* Ensure it lays over the main content */
+      transition: left 0.3s; /* Smooth sliding effect */
+  }
+
+  .right-panel {
+      width: 100%; /* Use full screen width */
+      margin-left: 0; /* Align with the screen edge */
+  }
+
+  /* When the menu is active (you'll need JS to toggle this class) */
+  .left-panel.active {
+    left: 0; /* Slide in */
+      transform: translateX(0); /* Slide in */
+  }
+}
+
+
+
+
+
+
+
+
  /* -----------+++++++++++panel slide++++++-------------- */
 
  
@@ -339,54 +395,43 @@ section {
 
 
 
- /* -----------+++++++++++Aboutme ++++++-------------- */
-
-
- .HelloContainer {
-
-  position: relative;
-  padding: 10px;
-  display: flex; /* Use flexbox to center children */
-  flex-direction: column; 
-  justify-content: center; /* Center children horizontally */
-  align-items: center; /* Center children vertically */
-  height: 80vh; /* Optional: Adjust based on your needs */
-  background-color: none;
-}
-
-
-.Hellobox {
-  background-color: none;
-  font-family: 'Montserrat-Bold', sans-serif;
-  margin-top: 0.321em; /* Adjust margin as needed */
-  /* Ensure there's no extra margin or padding affecting alignment */
-  font-size: 4rem;
-  text-align: center;
-  
-}
-
-
- .HelloSmall {
-  font-size: 1.5rem;
-  margin-top: 30px;
-  }
-
-.profilebox {
-  text-align: center;
-}
-
-#profile {
-
-  width: 300px;
-  border-radius: 50%;
-  border:solid 1px;
-
-}
-
-
- /* -----------+++++++++++About me end ++++++-------------- */
 
  /* -----------+++++++++++About me other starts ++++++-------------- */
+
+
+
+
+
+ 
+ @media (max-width: 768px) {
+     .cv-section {
+      width: 100%; /* Use full screen width */
+      margin-left: 0; /* Align with the screen edge */
+     }
+
+     .cv-panel {
+      width: 100%; /* Use full screen width */
+      margin-left: 0; /* Align with the screen edge */
+
+
+     }
+ }
+ 
+
+ .Profilecontainer {
+  display: block;
+  width: 300px;
+  max-width: 250px; /* Adjust based on your preference */
+  min-width: 200; /* Adjust based on your preference */
+  height: auto;
+  margin: 0 auto;
+  border-radius: 50%;
+  padding: 10px;
+ }
+
+
+
+
 
 
 .cv-panel {
@@ -446,14 +491,3 @@ section {
 /* Add any additional specific styles for elements within your CV sections here */
 
 /* Adjust the layout for small screens */
-@media (max-width: 768px) {
-  .cv-section {
-      margin-bottom: 15px;
-  }
-  .cv-section h2 {
-      font-size: 1.4rem;
-  }
-  .skills-list, .experience-item ul {
-      columns: 1; /* One column on smaller screens */
-  }
-}
