@@ -27,7 +27,7 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: "Poppins", sans-serif;
+    font-family: "DM_Sans", sans-serif;
     font-weight: 100;
     font-style: normal;}
   
@@ -111,7 +111,7 @@ a:hover::before {
   background-color: transparent;
   border: solid;
   border-radius: 50%;
-  font-size: 30px;
+  font-size: 40px;
   cursor: pointer;
   z-index: 3; /* Ensure it's above other content */
 }
@@ -161,9 +161,18 @@ a:hover::before {
  /* -----------+++++++++++panel slide end ++++++-------------- */
 
 strong {
-  font-family: "DM Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
+  font-style: italic;
+  font-size: 19px;
+  margin-bottom: 60px;
+}
+
+dt {
+  font-family: "Poppins", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 350;
   font-style: normal;
 }
 
@@ -178,6 +187,8 @@ h1 {
   z-index: 100; /* Ensure the left panel stays on top */
 
 }
+
+
 
 h2 {
     font-size: 2rem;
