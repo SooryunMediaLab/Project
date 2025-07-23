@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOO LEE Creative Project</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="cursor"></div>
+
+    <!-- Global annotation tooltip element (hidden by default) -->
+    <div id="global-annotation-tooltip" class="annotation-box">
+        <div class="annotation-arrow up"></div>
+        <span class="annotation-text"></span>
+    </div>
+
+    <nav class="top-bar">
+        <div class="container">
+            <a href="#home" class="logo">***</a> 
+            <div class="nav-links">
+                <a href="#about">ABOUT</a>
+                <a href="#projects">PROJECTS</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="snap-container">
+        <section id="home" class="section home-section">
+            <div class="content">
+                <h2 class="hero-subtitle">
+                    <span class="hero-name-container">
+                        <span class="hero-name-initial" id="hero-name-initial">*** ***</span>
+                        <span class="hero-name-hover" id="hero-name-actual">SOO LEE</span>
+                    </span><br>
+                    <span class="hero-roles hidden-initial">Content Operator | Contents Curator | Media Researcher</span>
+                </h2>
+                <p class="home-small-text hidden-initial">I specialize in exploring the dynamic intersection of technology, media, and cultural narratives.</p>
+            </div>
+        </section>
+
+        <section id="about" class="section about-section">
+            <div class="content">
+                <!-- Added hidden-initial-reveal class to elements for sequential appearance -->
+                <h2 class="section-heading hidden-initial-reveal" id="about-heading">ABOUT</h2>
+
+                <p class="hidden-initial-reveal" id="about-paragraph-1">I am a Media Coordinator | Contents Curator | Media Researcher | based in Berlin. My work explores the intersection of technology, media, and cultural narratives across digital platforms and creative projects.</p>
+                <p class="hidden-initial-reveal" id="about-paragraph-2">With a background in media culture, I specialize in digital content management, operations, and metadata architecture. I bridge diverse concepts to forge meaningful practices in cultural event production and digital media.</p>
+                <p>I am interested in </p> 
+                <!-- Wrapped about-tag-inline spans in a div with class "tags" and added ID for script.js to correctly select -->
+                <div class="tags hidden-initial-reveal" id="about-tags"> 
+                    <span class="tag about-tag-inline">#DigitalMedia</span>
+                    <span class="tag about-tag-inline">#Curating</span>
+                    <span class="tag about-tag-inline">#Research</span>
+                    <span class="tag about-tag-inline">#ArtTech</span>
+                    <span class="tag about-tag-inline">#Narrative</span>
+                    <span class="tag about-tag-inline">#Game</span>
+                    <span class="tag about-tag-inline">#Culture</span>
+                    <span class="tag about-tag-inline">#Web</span>
+                    <span class="tag about-tag-inline">#Planning</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section projects-section">
+            <div class="content">
+                <!-- Added hidden-initial-reveal class to heading for sequential appearance -->
+                <h2 class="section-heading hidden-initial-reveal" id="projects-heading">PROJECTS</h2>
+                <div class="projects-wrapper">
+                    <!-- project-item elements will have hidden-initial-reveal added by loadProjects() -->
+                    <div class="projects-grid" id="projects-grid"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact-section">
+            <div class="content">
+                <!-- Added hidden-initial-reveal class to elements for sequential appearance -->
+                <h2 class="section-heading hidden-initial-reveal" id="contact-heading">CONTACT</h2>
+                <p class="hidden-initial-reveal" id="contact-paragraph">Feel free to reach out for collabs, inquiries, or just to say hello!</p>
+                
+                <div class="social-links hidden-initial-reveal" id="contact-social-links">
+                    <a href="https://www.linkedin.com/in/leesoo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="mailto:leesooryunn@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="detail-overlay" class="hidden">
+        <div class="detail-content">
+            <div class="detail-left">
+                <button id="close-btn">&lt; BACK</button>
+                <h3 id="detail-title"></h3>
+                <p><strong>ROLE:</strong> <span id="detail-role"></span></p>
+                <p><strong>SUMMARY:</strong> <span id="detail-summary"></span></p>
+                <div id="detail-skills" class="tags"></div> 
+                <div id="detail-tags" class="tags"></div> 
+            </div>
+            <div class="detail-right">
+                <h4>DESCRIPTION</h4>
+                <img id="detail-top-img" src="" alt="Project Top Image" class="hidden">
+                <p id="detail-description"></p>
+                <div id="detail-gallery" class="image-gallery"></div>
+                <h4>FUNDING</h4>
+                <p id="detail-funding"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- The image popup overlay will be dynamically appended to the image wrapper -->
+    <div id="image-popup-overlay" class="image-popup-overlay hidden">
+        <div class="image-popup-content">
+            <button id="image-popup-close-btn">X</button>
+            <img id="image-popup-img" src="" alt="Popup Image">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
