@@ -1,0 +1,823 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
+
+/* --- NEW: Color & Style Variables --- */
+:root {
+    --primary-bg-color: #F8F8F8; /* Soft white, for clean report look */
+    --primary-text-color: #333333; /* Dark charcoal gray for main text */
+    --highlight-bg-color: #000000; /* Black for strong hover backgrounds */
+    --highlight-text-color: #FFBF00; /* Vibrant lime, for accent text on dark backgrounds */
+    --cursor-color: #FFFFFF; /* White for cursor */
+    --top-bar-height: 60px;
+    --content-padding: 20px;
+    --annotation-highlight-color: #FFA500; /* Orange for annotation highlight */
+    --emphasis-color: #fdf446; /* Tomato red for strong emphasis on home page */
+    --border-color: #D0D0D0; /* Light gray for general borders */
+}
+
+@media (hover: none) {
+    #cursor { display: none !important; }
+}
+
+/* --- Base & Cursor Styles --- */
+html, body {
+    cursor: none; /* Custom cursor is always active, no default browser cursor */
+    font-family: 'Roboto Mono', monospace;
+    /* Overall page background with subtle gray gradient at the top */
+    background: linear-gradient(to bottom, #F0F0F0 0%, var(--primary-bg-color) 10%);
+    background-attachment: fixed; /* Keep background fixed during scroll */
+    color: var(--primary-text-color); /* Set default text color */
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Press Start 2P', cursive; /* Default heading font */
+}
+
+/* Custom cursor size and color for better visibility */
+#cursor {
+    position: fixed;
+    width: 25px; /* Increased size */
+    height: 25px; /* Increased size */
+    background-color: var(--cursor-color); /* Changed color to white for contrast */
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out, border 0.2s ease-out;
+}
+
+/* Interactive cursor color to white */
+#cursor.interactive {
+    width: 40px; /* Increased interactive size */
+    height: 40px; /* Increased interactive size */
+    background-color: transparent; /* Changed to transparent for empty inside */
+    border: 1px solid var(--cursor-color); /* White border */
+}
+
+/* --- Top Navigation Bar Styling --- */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--top-bar-height);
+    background-color: transparent; /* Default transparent */
+    border-bottom: none; /* Removed outline */
+    border-image: none; /* Removed outline */
+
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease; /* Smooth transition for blur/background */
+}
+
+/* Styles for scrolled top bar with blur */
+.top-bar.scrolled {
+    background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white background */
+    backdrop-filter: blur(5px); /* Apply blur effect */
+}
+
+.top-bar .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.top-bar .logo {
+    font-family: 'Press Start 2P', cursive; /* Apply Press Start 2P font */
+    font-size: clamp(1.5rem, 1.7vw, 1.7rem); /* Adjusted size for SOO LEE */
+    color: var(--primary-text-color);
+    text-decoration: none;
+    font-style: normal; /* Remove italic */
+    font-weight: normal; /* Remove bold */
+}
+
+.top-bar .nav-links a {
+    margin-left: 20px;
+    color: var(--primary-text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 5px 0;
+    position: relative;
+    /* Removed background-color transition */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Added text-shadow transition */
+}
+
+.top-bar .nav-links a:hover {
+    color: var(--highlight-text-color); /* Apply amber color on hover */
+    /* Removed background-color change */
+    text-shadow: 0 0 5px var(--highlight-text-color), 0 0 10px var(--highlight-text-color); /* CRT glowing effect */
+    font-weight: normal; /* Reverted to normal weight */
+    /* Removed background-position */
+}
+
+
+/* --- Interactive Hover Effect (General) --- */
+/* Ensure no default browser cursor changes for interactive elements */
+.interactive-text,
+.read-more-btn,
+.social-links a,
+.project-item, /* Removed cursor: pointer from here */
+#close-btn, /* Removed cursor: pointer from here */
+.annotation-trigger-highlight, /* Removed cursor: help from here */
+.detail-content .tags .tag, /* Ensure tags in detail view don't show pointer */
+.strangers-ig-wrapper img /* Added for image popup trigger */
+{
+    cursor: none; /* Always use custom cursor */
+}
+
+.interactive-text:hover,
+.social-links a:hover {
+    color: var(--highlight-text-color);
+    background-color: var(--highlight-bg-color);
+}
+
+/* Project detail 강조 폰트 색상 및 굵기 */
+.detail-content strong {
+    color: #FFFFFF; /* White */
+    background-color: #000000; /* Black background for visibility */
+    font-weight: bold; /* Bold */
+}
+
+
+/* --- Sections & Layout --- */
+.snap-container {
+    scroll-snap-type: y mandatory;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.section {
+    scroll-snap-align: start;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* Adjusted padding-top to prevent overlap with top-bar */
+    padding-top: calc(var(--top-bar-height) + 20px); 
+    box-sizing: border-box;
+    background-color: var(--primary-bg-color); /* Applied consistent background */
+    color: var(--primary-text-color); /* Applied consistent text color */
+}
+
+/* Projects section will snap, allowing internal scroll */
+#projects.section {
+    scroll-snap-align: start; /* Re-enabled scroll-snap for projects section */
+}
+
+
+.content {
+    max-width: 900px;
+    width: 90%;
+    padding: var(--content-padding);
+    margin: 0 auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* For positioning annotation bubbles relative to content */
+}
+
+.home-section .content {
+    text-align: center;
+    justify-content: center; /* Center all content vertically as a group */
+    align-items: center; /* Center horizontally */
+    height: 100%; /* Ensure it fills the section height */
+    padding-top: 50px; /* Adjust as needed */
+    padding-bottom: 80px; /* Adjust for "some leisure" at the bottom */
+}
+.about-section .content { 
+    text-align: left; 
+    justify-content: center; /* Reverted to center for vertical alignment */
+    margin-top: -75px; /* Moved up by 75px as requested */
+}
+.projects-section .content { text-align: right; justify-content: flex-start; }
+.contact-section .content { text-align: center; justify-content: center; }
+
+/* Section Specifics */
+.home-section .hero-title {
+    display: none; /* Keep h1 hidden if it was accidentally kept */
+}
+
+/* Home section hero subtitle general styling */
+.home-section .hero-subtitle {
+    font-family: 'Roboto Mono', monospace; /* Default for non-highlighted parts */
+    font-size: clamp(1.5rem, 2.2vw, 2.2rem); /* Responsive font size for overall block */
+    font-weight: bold;
+    margin-bottom: 0; /* Remove default margin */
+    color: var(--primary-text-color);
+    line-height: 1.3;
+}
+
+/* Styling for the 'Soo Lee' name container for hover effect */
+.hero-name-container {
+    position: relative;
+    display: inline-block; /* Essential for positioning children and allowing hover */
+    cursor: none; /* Ensure custom cursor here */
+}
+
+/* Styling for the initial '*** ***' text with typing animation */
+.hero-name-initial {
+    font-family: 'Press Start 2P', cursive;
+    font-size: clamp(3rem, 6vw, 6rem); /* Much larger and responsive */
+    color: var(--primary-text-color);
+    display: inline-block;
+    white-space: nowrap; /* Keep text on one line */
+    overflow: hidden; /* Hide overflowing text */
+    border-right: 2px solid black; /* Black caret */
+    width: 0; /* Start with no width for typing effect */
+    animation: 
+      typing 0.8s steps(6, end) forwards, /* Faster typing, 6 steps for "SOO LEE" */
+      blink-caret 0.75s step-end infinite; /* Blinking caret */
+    animation-delay: 0.5s; /* Keep initial delay */
+    transition: opacity 0.3s ease; /* Keep opacity transition */
+}
+
+/* Ensure the blinking caret stops after typing */
+.hero-name-initial.typed {
+    animation: none; /* Stop typing and blinking */
+    border-right-color: transparent; /* Hide caret after typing */
+    width: 100%; /* Ensure full width is shown */
+}
+
+@keyframes typing {
+    from { width: 0 } /* Animate width for typing effect */
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-right-color: transparent; }
+    50% { border-right-color: black; } /* Blinking black caret */
+}
+
+/* Styling for the actual 'SOO LEE' name that appears on hover */
+.hero-name-hover {
+    font-family: 'Press Start 2P', cursive;
+    font-size: clamp(3rem, 6vw, 6rem);
+    color: var(--primary-text-color);
+    position: absolute; /* Overlay on initial text */
+    top: 0;
+    left: 0;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease; /* Smooth fade for hover */
+    white-space: nowrap;
+}
+
+/* Hover effect on the container */
+.hero-name-container:hover .hero-name-initial {
+    opacity: 0; /* Hide initial text on hover */
+}
+
+.hero-name-container:hover .hero-name-hover {
+    opacity: 1; /* Show actual name on hover */
+}
+
+
+/* Styling for the role descriptions */
+.hero-roles {
+    font-family: 'Roboto Mono', monospace;
+    font-size: clamp(0.9rem, 1.3vw, 1.3rem); /* Slightly smaller and responsive */
+    color: var(--primary-text-color);
+    white-space: nowrap; /* Prevent wrapping for this entire line */
+    display: inline-block; /* Ensure white-space nowrap works */
+    overflow: hidden; /* Hide overflow if text is too long and nowrap */
+    text-overflow: ellipsis; /* Add ellipsis if hidden by overflow */
+    max-width: 100%; /* Ensure it respects parent width */
+    margin-top: 20px; /* Add space between Soo Lee and roles */
+    margin-bottom: 0; /* Remove default margin */
+}
+
+/* Initial hidden state for elements that will reveal */
+/* Only apply to home section elements now */
+.hidden-initial {
+    opacity: 0;
+    transform: translateY(20px); /* Subtle slide up effect */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Class to reveal hidden texts and elements */
+.reveal-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.home-section .home-small-text {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.1rem; /* Slightly increased size for small text */
+    line-height: 1.7; /* Adjusted line-height for readability */
+    margin-top: 80px; /* Fixed margin-top to position it below the main block */
+    margin-bottom: 0; /* Remove default margin */
+    color: var(--primary-text-color);
+    max-width: 600px; /* Limit width for readability */
+}
+
+
+/* General annotation box styling (now global) */
+#global-annotation-tooltip {
+    position: fixed; /* Changed to fixed for mouse-relative positioning */
+    background-color: black;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-family: 'Roboto Mono', monospace; /* Use body font */
+    font-size: 0.85rem;
+    line-height: 1.4;
+    white-space: normal; /* Allow text to wrap */
+    max-width: 250px; /* Set max-width for annotations */
+    z-index: 9997; /* Below cursor, above other elements */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    opacity: 0; /* Hidden by default */
+    pointer-events: none; /* Prevents interaction when hidden */
+    transition: opacity 0.2s ease, transform 0.2s ease; /* Adjusted transition */
+    transform: translate(-50%, 0); /* Initial centering for left/right */
+}
+
+#global-annotation-tooltip.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Arrow styling for global annotation box */
+#global-annotation-tooltip .annotation-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    z-index: 9;
+    /* Arrow opacity is controlled by parent .annotation-box.visible */
+}
+
+/* Arrow pointing up (from bottom of box) */
+#global-annotation-tooltip .annotation-arrow.up {
+    border-width: 8px 8px 0 8px; /* Arrow pointing up */
+    border-color: transparent transparent black transparent;
+    bottom: -8px; /* Position at the bottom edge */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Arrow pointing down (from top of box) */
+#global-annotation-tooltip .annotation-arrow.down {
+    border-width: 0 8px 8px 8px; /* Arrow pointing down */
+    border-color: black transparent transparent transparent;
+    top: -8px; /* Position at the top edge */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.section-heading {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.section p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* --- Projects Section (Reverted to Card Style) --- */
+.projects-section .section-heading {
+    margin-bottom: 20px;
+}
+
+.projects-wrapper {
+    flex-grow: 1;
+    overflow-y: auto; /* Re-added for internal scrolling */
+    padding: 30px 15px 30px 0; 
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 0;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+    height: 0; /* Crucial for flex-grow to work with overflow */
+
+    /* --- NEW: Fade-out effect at the top --- */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+    /* ADDED: Extra padding-bottom to allow full scroll of project items */
+    padding-bottom: 200px; /* Increased for more scroll leisure */
+}
+
+.projects-wrapper::-webkit-scrollbar { display: none; } /* Hide scrollbar for Webkit browsers */
+
+.projects-grid {
+    /* Back to grid layout for cards */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; /* Gap between grid items */
+}
+
+.project-item {
+    /* Card styling */
+    border: 1px dotted var(--primary-text-color);
+    padding: 20px;
+    cursor: none; /* Ensure custom cursor here */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    text-align: left;
+    background-color: var(--primary-bg-color); /* Soft white background for cards */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Subtle shadow for card effect */
+    border-radius: 8px; /* Slightly rounded corners for cards */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Removed fixed height to allow content to dictate height */
+}
+
+/* Project item hover effect */
+.project-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
+    background-color: var(--highlight-bg-color); /* Black background on hover */
+    color: var(--highlight-text-color); /* Lime text on hover for the item itself */
+}
+
+/* Ensure text inside project-item also changes color (now to white) */
+.project-item:hover p {
+    color: var(--cursor-color); /* Changed to white for hover */
+}
+
+/* Project name hover effect */
+.project-item:hover h3 {
+    color: var(--highlight-text-color); /* Amber color for project name on hover */
+}
+
+/* Removed background-color from .read-more-btn:hover */
+.read-more-btn {
+    display: inline-block;
+    color: inherit;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: none; /* Ensure custom cursor here */
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.9rem;
+    transition: color 0.3s ease; /* Only color transition */
+    margin-top: auto; /* Push to the bottom */
+}
+
+.read-more-btn:hover {
+    color: var(--highlight-text-color); /* Only change color on hover */
+}
+
+
+.project-item h3 { 
+    font-size: 1.4rem; 
+    margin-bottom: 10px; /* Adjusted spacing */
+    transition: color 0.3s ease; /* Added transition for smooth color change */
+}
+.project-item p { 
+    font-size: 0.9rem; 
+    line-height: 1.4; 
+    margin-bottom: 15px; /* Adjusted spacing */
+}
+
+/* Tags alignment in projects section - reverted to card style */
+.projects-section .tags { 
+    display: flex; /* Ensure it's a flex container */
+    flex-wrap: wrap; /* Allow tags to wrap */
+    justify-content: center; /* Center align tags */
+    margin-top: 10px; /* Reduced margin-top */
+    margin-bottom: 15px; /* Space before button */
+    gap: 5px; /* Added gap for spacing between tags */
+}
+.about-section .tags { 
+    justify-content: flex-start; /* Keep about section tags left-aligned */
+}
+
+/* Tag styling for the new color scheme (general tags) */
+.tag {
+    background-color: #E0E0E0; /* Light gray background */
+    color: var(--primary-text-color); /* Dark gray text */
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    border: 1px solid var(--border-color); /* Light gray border */
+    transition: all 0.3s ease;
+    min-width: 40px; 
+    text-align: center;
+}
+.project-item:hover .tag {
+    background-color: var(--highlight-text-color); /* Lime background on hover */
+    color: var(--highlight-bg-color); /* Black text on lime */
+    border: 1px solid var(--highlight-text-color); /* Removed green outline, now amber */
+}
+
+.project-item .tag { padding: 3px 8px; font-size: 0.7rem; } /* Keep for detail view */
+
+
+/* About section inline tags */
+.about-section .about-tag-inline {
+    background-color: #E0E0E0; /* Light gray background */
+    color: var(--primary-text-color); /* Dark gray text */
+    padding: 3px 8px; /* Smaller padding for inline */
+    border-radius: 3px;
+    font-size: 0.85rem; /* Slightly larger for readability */
+    margin-right: 5px; /* Space between inline tags */
+    margin-bottom: 5px; /* Small vertical space if wrapping */
+    display: inline-block; /* Allows padding and margin */
+    border: 1px solid var(--border-color); /* Light gray border */
+}
+
+.social-links a {
+    margin-right: 20px;
+    color: inherit;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 5px 0;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* --- Project Detail Overlay --- */
+#detail-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    z-index: 2000;
+    display: flex; justify-content: center; align-items: center;
+    overflow-y: auto;
+    transition: opacity 0.3s ease;
+}
+
+#detail-overlay.hidden { 
+    pointer-events: none;
+    opacity: 0;
+}
+
+.detail-content {
+    background-color: #F8F8F8; /* Soft white background for content */
+    width: 90%; max-width: 1200px; height: 90vh;
+    display: flex; 
+    overflow: hidden; /* Ensure no scrollbars on the main content area */
+    border: 1px solid var(--border-color); /* Light gray border */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.detail-left, .detail-right {
+    padding: 30px; 
+    overflow-y: auto; /* Allow scrolling */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+    flex: 1;
+    color: var(--primary-text-color); /* Dark gray text */
+    font-family: 'Roboto Mono', monospace; line-height: 1.8;
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+.detail-left::-webkit-scrollbar,
+.detail-right::-webkit-scrollbar {
+    display: none; 
+}
+
+/* Added thin line between left and right panels */
+.detail-left { 
+    border-right: 1px solid var(--border-color); /* Light gray border */
+    min-width: 350px; 
+    max-width: 45%; 
+    position: relative; /* For annotation positioning */
+    /* Ensure content wraps within the left panel */
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+}
+.detail-right { flex-grow: 2; }
+
+#close-btn {
+    background: none; border: none; color: var(--primary-text-color); /* Dark gray text */
+    font-size: 1rem; cursor: none; /* Ensure custom cursor here */
+    padding: 5px 10px; margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+#close-btn:hover { 
+    color: var(--highlight-text-color); /* Lime text on hover */
+    background-color: var(--highlight-bg-color); /* Black background on hover */
+}
+
+/* Adjusted font size for project title in detail view */
+#detail-title {
+    font-family: 'Press Start 2P', cursive; 
+    font-size: 1.8rem; /* Reduced font size */
+    margin-bottom: 20px; color: #000; line-height: 1.3;
+}
+
+#detail-main-img, #detail-top-img, #detail-gallery img {
+    max-width: 100%; height: auto; margin-bottom: 15px;
+    border: 1px solid var(--border-color); /* Light gray border */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#detail-top-img { max-width: 60%; display: block; margin: 0 auto 15px auto; }
+
+/* Project detail tags styling */
+.detail-content .tags { 
+    justify-content: flex-start; 
+    margin-top: 15px; 
+    display: flex; /* Ensure it's a flex container */
+    flex-wrap: wrap; /* Allow tags to wrap */
+    gap: 8px; /* Added gap for spacing between tags */
+}
+.detail-content .tag {
+    background-color: transparent; /* Transparent background */
+    color: var(--primary-text-color); /* Dark gray text */
+    padding: 4px 8px; /* Adjusted padding for internal spacing */
+    border-radius: 3px;
+    font-size: 0.85rem;
+    border: 1px solid var(--primary-text-color); /* Dark gray outline */
+    transition: all 0.3s ease;
+}
+.detail-content .tag:hover {
+    background-color: #D0D0D0; /* Light gray background on hover */
+    color: var(--primary-text-color); /* Dark gray text on hover */
+}
+
+/* Detail right h4 styling */
+.detail-right h4 {
+    font-family: 'Press Start 2P', cursive; font-size: 1.8rem;
+    margin-bottom: 1rem; 
+    background-color: var(--primary-text-color); /* Black background */
+    color: var(--primary-bg-color); /* Soft white text */
+    padding: 5px 10px; border-radius: 5px; display: inline-block;
+}
+
+/* General annotation trigger highlight (orange) */
+.annotation-trigger-highlight {
+    background-color: var(--annotation-highlight-color); /* Orange background */
+    color: black;
+    padding: 2px 5px;
+    border-radius: 3px;
+    cursor: none; /* Ensure custom cursor here */
+}
+
+/* General highlight (Yello) */
+.annotation-general-highlight {
+    background-color: var(--emphasis-color); /* Orange background */
+    color: black;
+    padding: 2px 5px;
+    border-radius: 3px;
+    cursor: none; /* Ensure custom cursor here */
+}
+
+
+/* --- Project Thumbnail Preview (Reintroduced) --- */
+.project-thumbnail-preview {
+    position: fixed; pointer-events: none; z-index: 9998;
+    opacity: 0; 
+    /* Removed transform transition to eliminate "ghosting" */
+    transition: opacity 0.2s ease-out; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    border-radius: 5px; /* Reverted to 5px for rectangular shape */
+}
+.project-thumbnail-preview.visible { opacity: 1; } /* Removed transform: scale(1) */
+.project-thumbnail-preview img { 
+    width: 75px; 
+    height: auto; /* Reverted to auto height */
+    display: block; 
+    border-radius: 3px; /* Reverted to 3px for rectangular shape */
+    object-fit: unset; /* Removed object-fit: cover */
+}
+
+
+/* --- Image Popup Overlay (for in-place overlay) --- */
+.image-popup-overlay {
+    position: absolute; /* Position relative to its parent (the clicked image wrapper) */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Opaque black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* Above the image it's covering */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.image-popup-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.image-popup-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-popup-content img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensure the image fits within the bounds */
+    display: block;
+}
+
+#image-popup-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    cursor: none; /* Ensure custom cursor here */
+    z-index: 11; /* Above the popup image */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#image-popup-close-btn:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+/* New wrapper for strangersIG.jpg to make it a positioning context */
+.strangers-ig-wrapper {
+    position: relative; /* Crucial for positioning the absolute overlay */
+    display: block; /* Use block to occupy full width */
+    width: 100%; 
+    height: auto;
+    overflow: hidden; /* Hide overflow if image is larger than wrapper */
+}
+
+/* Ensure the image inside the wrapper scales correctly */
+.strangers-ig-wrapper img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .top-bar .container { flex-direction: column; height: auto; padding: 10px 0; }
+    .top-bar .nav-links { margin-top: 10px; }
+    .top-bar .nav-links a { margin: 0 10px; }
+    /* Adjusted padding-top for mobile */
+    .section { padding-top: 120px; } 
+    /* Hide annotation bubbles on mobile (already removed, but keeping for safety) */
+    .annotation-bubble {
+        display: none;
+    }
+    /* Revert h2 and p font sizes for better mobile readability if needed */
+    .home-section .hero-subtitle {
+        font-size: 1.8rem; /* Smaller for mobile */
+        font-weight: bold;
+    }
+    .home-section .home-small-text {
+        font-size: 1rem; /* Smaller for mobile */
+        line-height: 1.6;
+    }
+
+    .home-section .hero-title { /* Ensure h1 is hidden on mobile too, if it was accidentally kept */
+        display: none;
+    }
+    /* Mobile adjustments for hero-name and hero-roles */
+    .home-section .hero-name {
+        font-size: clamp(2rem, 8vw, 3rem); /* Adjust for smaller screens */
+    }
+    .home-section .hero-roles {
+        font-size: clamp(0.8rem, 2.5vw, 1rem); /* Adjust for smaller screens */
+    }
+
+
+    .section-heading { font-size: 1.8rem; }
+    .projects-grid { 
+        /* Reverted to single column for mobile card layout */
+        grid-template-columns: 1fr; 
+    }
+    .project-item {
+        /* Reverted mobile card layout */
+        flex-direction: column; /* Stack image and text vertically on mobile */
+        align-items: center; /* Center items when stacked */
+        text-align: center; /* Center text on mobile */
+    }
+    .projects-section .tags {
+        justify-content: center; /* Center tags on mobile */
+    }
+
+    .detail-content { flex-direction: column; height: 95vh; width: 95%; }
+    /* Removed border-right for mobile, added border-bottom */
+    .detail-left { border-right: none; border-bottom: 1px dotted #000; max-width: 100%; }
+}
